@@ -4,16 +4,16 @@
     <main>
         <section>
             <div class="grid_container">
+                {% for cloth in clothes %}
                 <div class="grid_box">
-                    {% for cloth in clothes %}
                     <img src="{{ cloth.image.url }}" alt="img">
                     <p class="title">{{ cloth.name }}</p>
                     <span class="price">{{ cloth.price }} azn</span>
                     <div class="select_size">
                         <select>
                             <option value="choose_size" class="choose_size">ölçü seçin</option>
-                            {% for cloth in sizes %}
-                            <option value="S">{{ cloth.size_name }}</option>
+                            {% for size in cloth.size.all %}
+                            <option value="S">{{ size.size_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -27,10 +27,14 @@
                                 d="M8 5C8 5.53043 7.78929 6.03914 7.41421 6.41421C7.03914 6.78929 6.53043 7 6 7C5.46957 7 4.96086 6.78929 4.58579 6.41421C4.21071 6.03914 4 5.53043 4 5"
                                 stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <p class="add_to_card">Səbətə əlavə et</p>
+                        <form method="POST">
+                            {% csrf_token %} 
+                            <input type="hidden" name="cloth_id" value="{{ cloth.id }}">
+                            <button type="submit" style="background-color: black; color:white; margin-left:5px;">Səbətə əlavə et</button>
+                        </form>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </section>
     </main>

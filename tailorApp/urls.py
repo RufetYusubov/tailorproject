@@ -4,4 +4,5 @@ from tailorApp import views
 urlpatterns = [
     path('index/', views.ClothView.as_view(),name='index'),
     path('contact/',views.ContactView.as_view(),name='contact'),
+    path('mybasket/',views.MyBasketView.as_view(),name="mybasket")
 ]

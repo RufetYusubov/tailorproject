@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailorApp',
     'account',
-    'rest-framework'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

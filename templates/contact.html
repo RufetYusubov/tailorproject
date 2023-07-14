@@ -3,47 +3,94 @@
 Contact
 {% endblock %} 
 
-{% block content %} 
+{% block css %} 
+{% load static %}
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 
-<div class="container">
-    <p style="text-align: center; font-size: 30px; font-weight: bold; padding-top: 30px;">CONTACT US</p>
-  
-    <form method="POST">
-        {% csrf_token %}
-  
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Name</label>
-            <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your name...">
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Surname</label>
-            <input name="surname" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your surname...">
-        </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Telephone</label>
-          <input name="telephone" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your telephone...">
-        </div>
-
-        <div class="form-group">
-          <label for="exampleFormControlInput1">E-mail</label>
-          <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="Your email address...">
-        </div>
-  
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Message</label>
-          <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="What's on your mind..."></textarea>
-        </div>
-  
-        <button type="submit" class="btn btn-secondary">Submit</button>
-    </form>
-    {% if messages %}
-      <ul class="messages">
-      {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-      </ul>
-      {% endif %}
-</div>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
+
+{% block content %}
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Contact Form </h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="wrapper img" style="background-image: url('/static/images/img.jpg');">
+						<div class="row">
+							<div class="col-md-9 col-lg-7">
+								<div class="contact-wrap w-100 p-md-5 p-4">
+									<h3 class="mb-4">Get in touch with us</h3>
+									<div id="form-message-warning" class="mb-4"></div> 
+				      		<div id="form-message-success" class="mb-4">
+				            Your message was sent, thank you!
+				      		</div>
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm">
+										{% csrf_token %}
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="label" for="name">Name</label>
+													<input type="text" class="form-control" name="name" id="name" placeholder="Name">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="label" for="name">Surname</label>
+													<input type="text" class="form-control" name="surname" id="name" placeholder="Surname">
+												</div>
+											</div>
+											<div class="col-md-6"> 
+												<div class="form-group">
+													<label class="label" for="email">Telephone</label>
+													<input type="text" class="form-control" name="telephone" id="name" placeholder="Telephone">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="email">Email Address</label>
+													<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="#">Message</label>
+													<textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Message"></textarea>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<input type="submit" value="Send Message" class="btn btn-primary">
+													<div class="submitting"></div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</body>
+{% endblock %} 
+
+
+{% block javascript %} 
+<script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
+
+

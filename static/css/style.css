@@ -132,7 +132,7 @@ header {
 }
 
 .header_background_image {
-    background: url('./images/head_image.png');
+    background: url('/static/images/head_image.png');
     height: 90vh;
     background-repeat: no-repeat;
     background-position-y: top;
