@@ -1,31 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% block title %} 
-Sign Up
-{% endblock %}
+Signup
+{% endblock %} 
+
+{% block css %} 
+{% load static %}
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'css/style1.css' %}">
+{% endblock %} 
+
+
 
 {% block content %}
-    <div class="container">
-        <h1>Sign Up</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Username</label>
-              <input type="text" name = "username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">Username must be unique</div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name= "password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-          </form>
-          {% if messages %}
-          <ul class="messages">
-          {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-          {% endfor %}
-          </ul>
-          {% endif %}
-    </div>
+		<div class="wrapper" style="background-image: url('/static/images/bg-registration-form-1.jpg');">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="/static/images/registration-form-1.jpg" alt="">
+				</div>
+				<form action="">
+					<h3>Registration Form</h3>
+					<div class="form-wrapper">
+						<input type="text" name="username" placeholder="Username" class="form-control">
+						<i class="zmdi zmdi-account"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="password" name="password" placeholder="Password" class="form-control">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<button>Register
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+		
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 {% endblock %}
