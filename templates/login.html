@@ -20,8 +20,9 @@ Login
 				<div class="image-holder">
 					<img src="/static/images/registration-form-1.jpg" alt="">
 				</div>
-				<form action="">
-					<h3>Login</h3>
+				<form method="POST">
+					{% csrf_token %}
+					<h1>Login</h1>
 					<div class="form-wrapper">
 						<input type="text" name="username" placeholder="Username" class="form-control">
 						<i class="zmdi zmdi-account"></i>
@@ -30,7 +31,7 @@ Login
 						<input type="password" name="password" placeholder="Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-          <p class="text-body-secondary"><a class="btn btn-danger" href="{% url 'signup'  %}">Signup</a> Create new account</p>
+                   <p class="text-body-secondary"><a class="btn btn-danger" href="{% url 'signup'  %}">Signup</a> Create new account</p>
 					<button>Log in
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>

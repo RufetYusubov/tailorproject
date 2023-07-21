@@ -15,13 +15,15 @@ Signup
 
 
 
+
 {% block content %}
 		<div class="wrapper" style="background-image: url('/static/images/bg-registration-form-1.jpg');">
 			<div class="inner">
 				<div class="image-holder">
 					<img src="/static/images/registration-form-1.jpg" alt="">
 				</div>
-				<form action="">
+				<form method="POST">
+					{% csrf_token %}
 					<h3>Registration Form</h3>
 					<div class="form-wrapper">
 						<input type="text" name="username" placeholder="Username" class="form-control">
@@ -31,6 +33,7 @@ Signup
 						<input type="password" name="password" placeholder="Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
+					<p class="text-body-secondary"><a class="btn btn-danger" href="{% url 'login'  %}">Login</a> </p>
 					<button>Register
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>

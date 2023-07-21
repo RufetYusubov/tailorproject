@@ -6,6 +6,8 @@ from django.http import Http404
 
 class ClothView(View):
     def get(self,request,*args,**kwargs):
+        if not request.user.is_authenticated:
+            return redirect("login")
         clothes = ClothModel.objects.order_by("price")
         contacts = ContactUsModel.objects.all()
         settings = SettingsModel.objects.all()
