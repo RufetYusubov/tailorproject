@@ -69,9 +69,10 @@ class MyBasketView(View):
         mybaskets = Mybasket.objects.filter(
             user = request.user
         )
-        total_price = 0
+        total = 0
         for basket in mybaskets:
-            total_price += basket.cloth.price
+           total += basket.cloth.price
+           total_price = round(total,2)
 
         context = {
             "mybaskets" : mybaskets,
