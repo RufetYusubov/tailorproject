@@ -20,7 +20,7 @@ Signup
 		<div class="wrapper" style="background-image: url('/static/images/bg-registration-form-1.jpg');">
 			<div class="inner">
 				<div class="image-holder">
-					<img src="/static/images/registration-form-1.jpg" alt="">
+					<img src="/static/images/signup.png" alt="">
 				</div>
 				<form method="POST">
 					{% csrf_token %}
@@ -33,7 +33,7 @@ Signup
 						<input type="password" name="password" placeholder="Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-					<p class="text-body-secondary"><a class="btn btn-danger" href="{% url 'login'  %}">Login</a> </p>
+					<p class="text-body-secondary">Have an account?<a class="btn btn-danger" href="{% url 'login'  %}">Login</a> </p>
 					<button>Register
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>

@@ -15,9 +15,7 @@ Contact
 {% block header %}
 <header>
 	<div class="header_container">
-		<div class="logo">
-			<a href="#">LOGO.</a>
-		</div>
+		<a href="{% url 'index' %}"><img src="/static/images/tailor.jpg" alt=""></a>
 		<nav>
 			<ul class="nav_list">
 				<li><a href="{% url 'index' %}">ƏSAS SƏHİFƏ</a></li>
@@ -162,7 +160,7 @@ Contact
 
 
 {% block javascript %} 
-<script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'js/popper.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/jquery.validate.min.js' %}"></script>

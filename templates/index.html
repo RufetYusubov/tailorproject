@@ -1,142 +1,174 @@
-{% extends 'base.html' %} 
-{% block title %} Index {% endblock %} 
+{% extends 'base.html' %}
+{% block title %} Index {% endblock %}
 
 {% block header %}
 <header>
-	<div class="header_container">
-		<div class="logo">
-			<a href="#">LOGO.</a>
-		</div>
-		<nav>
-			<ul class="nav_list">
-				<li><a href="{% url 'index' %}">ƏSAS SƏHİFƏ</a></li>
-				<li><a href="{% url 'index' %}">MƏHSULLAR</a></li>
-				<li><a href="#about">HAQQIMIZDA</a></li>
-				<li><a href="{% url 'contact' %}">BİZİMLƏ ƏLAQƏ</a></li>
-			</ul>
-		</nav>
-		<div class="header_icons_container">
-			<div class="input_icon">
-				
-				<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path
-						d="M11.5 19.5C15.9183 19.5 19.5 15.9183 19.5 11.5C19.5 7.08172 15.9183 3.5 11.5 3.5C7.08172 3.5 3.5 7.08172 3.5 11.5C3.5 15.9183 7.08172 19.5 11.5 19.5Z"
-						stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-					<path d="M21.5 21.5L17.15 17.15" stroke="black" stroke-width="2" stroke-linecap="round"
-						stroke-linejoin="round" />
-				</svg>
+    <div class="header_container">
+        <a href="{% url 'index' %}"><img src="/static/images/tailor.jpg" alt=""></a>
+        <nav>
+            <ul class="nav_list">
+                <li><a href="{% url 'index' %}">ƏSAS SƏHİFƏ</a></li>
+                <li><a href="{% url 'index' %}">MƏHSULLAR</a></li>
+                <li><a href="#about">HAQQIMIZDA</a></li>
+                <li><a href="{% url 'contact' %}">BİZİMLƏ ƏLAQƏ</a></li>
+            </ul>
+        </nav>
+        <div class="header_icons_container">
+            <div class="input_icon">
 
-				<input type="text" placeholder="Search for items...">
-			</div>
-			{% if request.user.is_authenticated %} 
-			<a href="{% url 'logout' %}">
-                <svg class="user_icon"  width="25" height="25" viewBox="0 0 25 25" fill="none"
-                    xmlns="http://www.w3.org/2000/svg"> 
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M11.5 19.5C15.9183 19.5 19.5 15.9183 19.5 11.5C19.5 7.08172 15.9183 3.5 11.5 3.5C7.08172 3.5 3.5 7.08172 3.5 11.5C3.5 15.9183 7.08172 19.5 11.5 19.5Z"
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21.5 21.5L17.15 17.15" stroke="black" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+
+                <input type="text" placeholder="Search for items...">
+            </div>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">
+                <svg class="user_icon" width="25" height="25" viewBox="0 0 25 25" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M20.5 21.5V19.5C20.5 18.4391 20.0786 17.4217 19.3284 16.6716C18.5783 15.9214 17.5609 15.5 16.5 15.5H8.5C7.43913 15.5 6.42172 15.9214 5.67157 16.6716C4.92143 17.4217 4.5 18.4391 4.5 19.5V21.5"
                         stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <path
                         d="M12.5 11.5C14.7091 11.5 16.5 9.70914 16.5 7.5C16.5 5.29086 14.7091 3.5 12.5 3.5C10.2909 3.5 8.5 5.29086 8.5 7.5C8.5 9.70914 10.2909 11.5 12.5 11.5Z"
                         stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-			    </svg>
+                </svg>
             </a>
-			{% else %}
-			<a href="{% url 'login' %}">
-			<svg class="user_icon"  width="25" height="25" viewBox="0 0 25 25" fill="none"
-				xmlns="http://www.w3.org/2000/svg"> 
-				<path
-					d="M20.5 21.5V19.5C20.5 18.4391 20.0786 17.4217 19.3284 16.6716C18.5783 15.9214 17.5609 15.5 16.5 15.5H8.5C7.43913 15.5 6.42172 15.9214 5.67157 16.6716C4.92143 17.4217 4.5 18.4391 4.5 19.5V21.5"
-					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-				<path
-					d="M12.5 11.5C14.7091 11.5 16.5 9.70914 16.5 7.5C16.5 5.29086 14.7091 3.5 12.5 3.5C10.2909 3.5 8.5 5.29086 8.5 7.5C8.5 9.70914 10.2909 11.5 12.5 11.5Z"
-					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-			</svg>
-			</a>
-			{% endif %} 
-			{% if request.user.is_authenticated %}
-			<a href="{% url 'mybasket' %}">
-			<svg class="bag_icon" width="25" height="25" viewBox="0 0 25 25" fill="none"
-				xmlns="http://www.w3.org/2000/svg">
-				<path
-					d="M6.5 2.5L3.5 6.5V20.5C3.5 21.0304 3.71071 21.5391 4.08579 21.9142C4.46086 22.2893 4.96957 22.5 5.5 22.5H19.5C20.0304 22.5 20.5391 22.2893 20.9142 21.9142C21.2893 21.5391 21.5 21.0304 21.5 20.5V6.5L18.5 2.5H6.5Z"
-					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-				<path d="M3.5 6.5H21.5" stroke="black" stroke-width="2" stroke-linecap="round"
-					stroke-linejoin="round" />
-				<path
-					d="M16.5 10.5C16.5 11.5609 16.0786 12.5783 15.3284 13.3284C14.5783 14.0786 13.5609 14.5 12.5 14.5C11.4391 14.5 10.4217 14.0786 9.67157 13.3284C8.92143 12.5783 8.5 11.5609 8.5 10.5"
-					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-			</svg>
-			</a>
-			{% endif %}
-		</div>
-	</div>
-	<div class="header_background_image">
-		<div class="header_background_content">
-			<h1 class="head_slogan">Zərif və güclü</h1>
-		</div>
-	</div>
+            {% else %}
+            <a href="{% url 'login' %}">
+                <svg class="user_icon" width="25" height="25" viewBox="0 0 25 25" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20.5 21.5V19.5C20.5 18.4391 20.0786 17.4217 19.3284 16.6716C18.5783 15.9214 17.5609 15.5 16.5 15.5H8.5C7.43913 15.5 6.42172 15.9214 5.67157 16.6716C4.92143 17.4217 4.5 18.4391 4.5 19.5V21.5"
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M12.5 11.5C14.7091 11.5 16.5 9.70914 16.5 7.5C16.5 5.29086 14.7091 3.5 12.5 3.5C10.2909 3.5 8.5 5.29086 8.5 7.5C8.5 9.70914 10.2909 11.5 12.5 11.5Z"
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'mybasket' %}">
+                <svg class="bag_icon" width="25" height="25" viewBox="0 0 25 25" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.5 2.5L3.5 6.5V20.5C3.5 21.0304 3.71071 21.5391 4.08579 21.9142C4.46086 22.2893 4.96957 22.5 5.5 22.5H19.5C20.0304 22.5 20.5391 22.2893 20.9142 21.9142C21.2893 21.5391 21.5 21.0304 21.5 20.5V6.5L18.5 2.5H6.5Z"
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.5 6.5H21.5" stroke="black" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M16.5 10.5C16.5 11.5609 16.0786 12.5783 15.3284 13.3284C14.5783 14.0786 13.5609 14.5 12.5 14.5C11.4391 14.5 10.4217 14.0786 9.67157 13.3284C8.92143 12.5783 8.5 11.5609 8.5 10.5"
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- <div class="header_background_image">
+        <div class="header_background_content">
+            <h1 class="head_slogan">Zərif və güclü</h1>
+        </div>
+    </div> -->
+    <div class="slider slider_header">
+            <div class="slider-item">
+                <div class="header_background_image">
+                    <div class="slider-content">
+                        <h1 class="head_slogan">Zərif və güclü</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="header_background_image2">
+                    <div class="slider-content">
+                        <h1 class="head_slogan">Fərqli çeşidlər</h1>
+                    </div>
+                </div>
+            </div>
+        <button class="prev-slide">
+            <svg class="left_icon1" xmlns="http://www.w3.org/2000/svg" width="15" height="29" viewBox="0 0 15 29"
+                fill="none">
+                <path
+                    d="M1.83468 10.1092L11.433 0.602298C11.8248 0.216529 12.3548 0 12.9072 0C13.4596 0 13.9896 0.216529 14.3814 0.602298C14.5774 0.794845 14.733 1.02392 14.8392 1.27632C14.9453 1.52872 15 1.79944 15 2.07287C15 2.3463 14.9453 2.61702 14.8392 2.86942C14.733 3.12181 14.5774 3.35089 14.3814 3.54344L4.76225 13.0297C4.56626 13.2222 4.41069 13.4513 4.30453 13.7037C4.19836 13.9561 4.1437 14.2268 4.1437 14.5002C4.1437 14.7737 4.19836 15.0444 4.30453 15.2968C4.41069 15.5492 4.56626 15.7783 4.76225 15.9708L14.3814 25.457C14.7752 25.8443 14.9975 26.3707 14.9995 26.9203C15.0015 27.4699 14.7829 27.9978 14.3919 28.3878C14.0009 28.7778 13.4695 28.998 12.9146 29C12.3597 29.0019 11.8267 28.7854 11.433 28.3982L1.83468 18.8912C0.659876 17.7262 0 16.1469 0 14.5002C0 12.8536 0.659876 11.2743 1.83468 10.1092Z"
+                    fill="white" fill-opacity="0.52" />
+            </svg>
+        </button>
+        <button class="next-slide">
+            <svg class="right_icon1" xmlns="http://www.w3.org/2000/svg" width="15" height="29" viewBox="0 0 15 29"
+                fill="none">
+                <path
+                    d="M13.1653 10.1092L3.56705 0.602298C3.17525 0.216529 2.64524 0 2.0928 0C1.54035 0 1.01035 0.216529 0.618552 0.602298C0.422554 0.794845 0.266987 1.02392 0.160823 1.27632C0.0546589 1.52872 0 1.79944 0 2.07287C0 2.3463 0.0546589 2.61702 0.160823 2.86942C0.266987 3.12181 0.422554 3.35089 0.618552 3.54344L10.2377 13.0297C10.4337 13.2222 10.5893 13.4513 10.6955 13.7037C10.8016 13.9561 10.8563 14.2268 10.8563 14.5002C10.8563 14.7737 10.8016 15.0444 10.6955 15.2968C10.5893 15.5492 10.4337 15.7783 10.2377 15.9708L0.618552 25.457C0.224785 25.8443 0.00246735 26.3707 0.000506541 26.9203C-0.00145427 27.4699 0.217104 27.9978 0.608098 28.3878C0.999093 28.7778 1.5305 28.998 2.08541 29C2.64032 29.0019 3.17328 28.7854 3.56705 28.3982L13.1653 18.8912C14.3401 17.7262 15 16.1469 15 14.5002C15 12.8536 14.3401 11.2743 13.1653 10.1092Z"
+                    fill="white" fill-opacity="0.52" />
+            </svg>
+        </button>
+    </div>
 </header>
 {% endblock %}
 
 
 {% block content %}
-    <main>
-        <section>
-            <div class="grid_container">
-                {% for cloth in clothes %}
-                <div class="grid_box">
-                    <img src="{{ cloth.image.url }}" alt="img">
-                    <p class="title">{{ cloth.name }}</p>
-                    <span class="price">{{ cloth.price }} azn</span>
-                    <div class="select_size">
-                        <select>
-                            <option value="choose_size" class="choose_size">ölçü seçin</option>
-                            {% for size in cloth.size.all %}
-                            <option value="S">{{ size.size_name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="basket">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M3 1L1.5 3V10C1.5 10.2652 1.60536 10.5196 1.79289 10.7071C1.98043 10.8946 2.23478 11 2.5 11H9.5C9.76522 11 10.0196 10.8946 10.2071 10.7071C10.3946 10.5196 10.5 10.2652 10.5 10V3L9 1H3Z"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M1.5 3H10.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M8 5C8 5.53043 7.78929 6.03914 7.41421 6.41421C7.03914 6.78929 6.53043 7 6 7C5.46957 7 4.96086 6.78929 4.58579 6.41421C4.21071 6.03914 4 5.53043 4 5"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <form method="POST">
-                            {% csrf_token %} 
-                            <input type="hidden" name="cloth_id" value="{{ cloth.id }}">
-                            <button type="submit" style="background-color: black; color:white; margin-left:5px;">Səbətə əlavə et</button>
-                        </form>
-                    </div>
+<main>
+    <section>
+        <div class="grid_container">
+            {% for cloth in clothes %}
+            <div class="grid_box">
+                <img src="{{ cloth.image.url }}" alt="img">
+                <p class="title">{{ cloth.name }}</p>
+                <span class="price">{{ cloth.price }} azn</span>
+                <div class="select_size">
+                    <select>
+                        <option value="choose_size" class="choose_size">ölçü seçin</option>
+                        {% for size in cloth.size.all %}
+                        <option value="S">{{ size.size_name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                {% endfor %}
+                <div class="basket">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M3 1L1.5 3V10C1.5 10.2652 1.60536 10.5196 1.79289 10.7071C1.98043 10.8946 2.23478 11 2.5 11H9.5C9.76522 11 10.0196 10.8946 10.2071 10.7071C10.3946 10.5196 10.5 10.2652 10.5 10V3L9 1H3Z"
+                            stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.5 3H10.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M8 5C8 5.53043 7.78929 6.03914 7.41421 6.41421C7.03914 6.78929 6.53043 7 6 7C5.46957 7 4.96086 6.78929 4.58579 6.41421C4.21071 6.03914 4 5.53043 4 5"
+                            stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="cloth_id" value="{{ cloth.id }}">
+                        <button type="submit">Səbətə
+                            əlavə et</button>
+                    </form>
+                </div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="aboutUs_information" id="about">
-            <div class="aboutUs">
-                <h4>HAQQIMIZDA</h4>
-                {% for setting in settings %}
-                <p>{{ setting.about }}</p>
-                {% endfor %}
-            </div>
-            <!-- <div class="vertical_line"></div> -->
-            <div class="information">
-                <h4>BİZİMLƏ ƏLAQƏ</h4>
-                {% for contact in contacts %}
-                <p class="adress">{{ contact.streetadres }} </p>
-                <p class="phone_number">{{ contact.telephone }}</p>
-                <p class="email">{{ contact.email }}</p>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-    </footer>
+    </section>
+</main>
+
+<footer>
+    <div class="aboutUs_information" id="about">
+        <div class="aboutUs">
+            <h4>HAQQIMIZDA</h4>
+            {% for setting in settings %}
+            <p>{{ setting.about }}</p>
+            {% endfor %}
+        </div>
+        <!-- <div class="vertical_line"></div> -->
+        <div class="information">
+            <h4>BİZİMLƏ ƏLAQƏ</h4>
+            {% for contact in contacts %}
+            <p class="adress">{{ contact.streetadres }} </p>
+            <p class="phone_number">{{ contact.telephone }}</p>
+            <p class="email">{{ contact.email }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</footer>
+
 </body>
 
 </html>
