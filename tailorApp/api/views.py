@@ -1,9 +1,10 @@
-from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListCreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListCreateAPIView,ListAPIView,CreateAPIView
+from django.contrib.auth.models import User
 
 
-from tailorApp.models import ClothModel,ContactModel,ContactUsModel,SettingsModel,SizeModel,Mybasket
-from tailorApp.api.serializers import (ClothSerializer,ContactSerializer,ContactUsSerializer,
-                                       SettingsSerializer,MybasketSerializer,SizeSerializer)
+from tailorApp.models import ClothModel,ContactModel,ContactUsModel,SizeModel
+from tailorApp.api.serializers import (ClothSerializer,ContactSerializer,ContactUsSerializer,SizeSerializer,
+                                       UserListSerializer,UserCreateSerializer,UserUpdateSerializer)
 
 class ClothListCreateAPIView(ListCreateAPIView):
     queryset = ClothModel.objects.all()
@@ -32,16 +33,6 @@ class ContactUsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = ContactUsModel.objects.all()
     serializer_class = ContactUsSerializer
     lookup_field = "id"
-#---------------------------------------------------------------------------------------
-
-class SettingsListCreateAPIView(ListCreateAPIView):
-    queryset = SettingsModel.objects.all()
-    serializer_class = SettingsSerializer
-
-class SettingsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = SettingsModel.objects.all()
-    serializer_class = SettingsSerializer
-    lookup_field = "id"
 #-------------------------------------------------------------------------------------
 class SizeListCreateAPIView(ListCreateAPIView):
     queryset = SizeModel.objects.all()
@@ -51,15 +42,20 @@ class SizeRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = SizeModel.objects.all()
     serializer_class = SizeSerializer
     lookup_field = "id"
-#---------------------------------------------------------------------
-class MybasketListCreateAPIView(ListCreateAPIView):
-    queryset = Mybasket.objects.all()
-    serializer_class = MybasketSerializer
+#------------------------------------------------------------------------------------
 
-class MybasketRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Mybasket.objects.all()
-    serializer_class = MybasketSerializer
-    lookup_field = "id"
+class UserListAPIView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserListSerializer
+
+class UserCreateAPIView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserCreateSerializer
+
+class UserRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserUpdateSerializer
+    lookup_field = "pk"
 
 
 

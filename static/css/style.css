@@ -26,7 +26,10 @@ body {
 
 header {
     height: 100vh;
-    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 10%);
+}
+
+a{
+    text-decoration: none;
 }
 
 .header_container {
@@ -42,6 +45,8 @@ header {
 .header_container img{
     width: 180px;
     border-radius: 50%;
+    z-index: 999;
+    position: relative;
 }
 
 .nav_list {
@@ -57,7 +62,6 @@ header {
 .nav_list li a {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
-    text-decoration: none;
     color: var(--logo--black);
     font-size: 1.8rem;
 }
@@ -99,7 +103,7 @@ header {
 }
 
 .input_icon {
-    border-radius: 4px;
+    /* border-radius: 4px; */
     width: 186px;
     height: 31px;
     display: flex;
@@ -109,23 +113,14 @@ header {
 
 .input_icon input {
     background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    border: none;
+    outline: none;
     border-bottom: 1px solid #9b9b9b;
     margin-left: 3px;
-    outline: none;
-    font-size: 1.6rem;
     width: 85%;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: var(--black);
-}
-
-.input_icon i {
-    color: var(--black);
     font-size: 1.6rem;
-    margin-right: 5px;
+    padding-left: 5px;
+    color: var(--black);
 }
 
 .header_background_image {
@@ -142,22 +137,13 @@ header {
     background-position: top;
     background-size: cover;
 }
-
-.header_background_content {
-    max-width: 860px;
-    margin: 0 auto;
-    padding-top: 50vh;
+.header_background_image3 {
+    background: url('/static/images/alisveris.png');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
 }
-
-.head_slogan {
-    font-family: 'Bona Nova';
-    font-weight: 700;
-    font-size: 5.6rem;
-    line-height: 125%;
-    letter-spacing: 0.64em;
-    color: var(--white);
-}
-
 
 /* main section */
 
@@ -179,7 +165,6 @@ header {
 
 .title {
     font-family: 'Lato';
-    font-style: normal;
     font-weight: 600;
     font-size: 1.3rem;
     line-height: 16px;
@@ -190,7 +175,6 @@ header {
 
 .price {
     font-family: 'Lato';
-    font-style: normal;
     font-weight: 400;
     font-size: 1.3rem;
     line-height: 16px;
@@ -215,22 +199,18 @@ header {
     align-items: center;
     width: 152px;
     height: 26px;
+    gap: 5px;
     padding: 5px 16px 5px 10px;
     background: var(--title);
-    box-shadow: 0px 1px 4px rgba(56, 57, 67, 0.25);
+}
+
+.basket button{
+    background: none;
+     border: none;
+    outline: none;
+    color: white;
     cursor: pointer;
 }
-
-.add_to_card {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.3rem;
-    line-height: 16px;
-    color: var(--white);
-    margin-left: 14px;
-}
-
 
 /* footer */
 
@@ -295,42 +275,26 @@ footer {
     position: absolute;
     content: '';
     width: 1px;
-    height: 352px;
-    top: -44px;
+    height: 305px;
+    bottom: -44px;
     left: -121px;
     background-color: var(--line);
-}
-
-.basket button{
-    background-color: #222222;
-    color: white;
-    margin-left: 5px;
-    border: none;
-    outline: none;
 }
 
 
 .slider {
     position: relative;
-    overflow: hidden;
-    width: 100%;
-}
-.slider_header{
     height: 90vh;
 }
+
+
 
 .slider-item {
     position: absolute;
     width: 100%;
     height: 100%;
-    /* display: none; */
     opacity: 0;
-    transition: opacity 1.5s ease;
-}
-
-.slider-item img {
-    width: 100%;
-    height: 100%;
+    transition: opacity 1s ease;
 }
 
 .slider-content {
@@ -339,11 +303,15 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: #fff; /* Metin rengini istediğiniz gibi ayarlayabilirsiniz */
 }
 
 .head_slogan {
-    font-size: 36px; /* Başlık font boyutunu ayarlayabilirsiniz */
+    font-size: 4rem;
+    font-family: 'Bona Nova';
+    font-weight: 700;
+    line-height: 125%;
+    letter-spacing: 0.64em;
+    color: var(--white);
 }
 
 .prev-slide,
@@ -353,9 +321,7 @@ footer {
     transform: translateY(-50%);
     background: none;
     border: none;
-    font-size: 24px;
     cursor: pointer;
-    z-index: 1;
 }
 
 .prev-slide {
@@ -364,4 +330,10 @@ footer {
 
 .next-slide {
     right: 40px;
+}
+
+.section_header{
+    text-align: center;
+    font-size: 35px;
+    margin-top: 35px;
 }

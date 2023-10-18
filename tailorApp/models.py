@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 class SizeModel(models.Model):
     size_name = models.CharField(max_length=120)
 
+    class Meta:
+        verbose_name = 'Size'
+
     def __str__(self) -> str:
         return self.size_name
     
@@ -11,8 +14,14 @@ class SizeModel(models.Model):
 class ClothModel(models.Model):
     name = models.CharField(max_length=120)
     price = models.FloatField(default=0)
+    discountPrice = models.FloatField(blank=True, null=True)
     image = models.ImageField(upload_to="posters/")
-    size = models.ManyToManyField(SizeModel,blank=True,null=True,related_name="clothes")
+    about = models.TextField()
+    sizes = models.ManyToManyField(SizeModel,blank=True,null=True,related_name="clothes")
+
+    class Meta:
+        verbose_name = 'Cloth'
+        verbose_name_plural = 'Clothes'
 
 
     def __str__(self) -> str:
@@ -23,19 +32,14 @@ class ContactUsModel(models.Model):
     email = models.EmailField()
     telephone = models.CharField(max_length=100)
     streetadres = models.CharField(max_length=200)
+    about = models.TextField()
+
+    class Meta:
+        verbose_name_plural = 'With us contact'
 
     def __str__(self) -> str:
         return self.email
-    
-class SettingsModel(models.Model):
-    banner_image = models.ImageField(upload_to='posters/', blank=True,null=True)
-    banner_title = models.CharField(max_length=300)
-    logo = models.ImageField(upload_to='posters/', blank=True,null=True)
-    about = models.TextField()
-
-    def __str__(self) -> str:
-        return self.about
-    
+       
 class ContactModel(models.Model):
     name = models.CharField(max_length=20)
     surname = models.CharField(max_length=30)
@@ -43,12 +47,9 @@ class ContactModel(models.Model):
     email = models.EmailField()
     message = models.TextField()
 
-    def __str__(self) -> str:
-        return self.name
-    
-class Mybasket(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_basket_clothes")
-    cloth = models.ForeignKey(ClothModel,on_delete=models.CASCADE,related_name="my_clothes")
+    class Meta:
+        verbose_name = 'Contact'
 
     def __str__(self) -> str:
-        return self.user.username
+        return self.name + " " + self.surname
+    

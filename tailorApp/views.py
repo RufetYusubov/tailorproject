@@ -1,40 +1,28 @@
 from django.shortcuts import render,redirect
-from tailorApp.models import ClothModel,ContactUsModel,ContactModel,SettingsModel,SizeModel,Mybasket
+from tailorApp.models import ClothModel,ContactUsModel,ContactModel,SizeModel
 from django.views.generic import View
 from django.contrib import messages
 from django.http import Http404
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
+
 
 class ClothView(View):
     def get(self,request,*args,**kwargs):
         if not request.user.is_authenticated:
-            return redirect("login")
+            raise Http404
         clothes = ClothModel.objects.order_by("price")
         contacts = ContactUsModel.objects.all()
-        settings = SettingsModel.objects.all()
         sizes = SizeModel.objects.all()
 
         
         context = {
             "clothes" : clothes,
             "contacts" : contacts,
-            "settings" : settings,
             "sizes" : sizes
         }
         return render(request, 'index.html',context)
-    
-
-    def post(self,request,*args,**kwargs):
-        cloth_id = request.POST.get("cloth_id")
-        cloth = ClothModel.objects.get(id=cloth_id)
-
-        if request.user.is_authenticated:
-            Mybasket.objects.create(
-                user = request.user,
-                cloth = cloth
-            )
-        return redirect("mybasket")
-
-        
+            
 #-----------------------------------------------------------
 class ContactView(View):
     def get(self,request,*args,**kwargs):
@@ -61,31 +49,98 @@ class ContactView(View):
     
 
 #-----------------------------------------------------------------------
-class MyBasketView(View):
+# ------------------------- Signup Login  -------------------------------------------
+def check_password(password):
+    if len(password)>=8:
+        return True
+    return False
+
+def check_validation(password):
+    has_digit, has_upper_case, has_lower_case, has_symbols = False, False, False, False
+
+    for i in password:
+        if i.isdigit():
+            has_digit =  True
+        elif i.isalpha() and i.isupper():
+            has_upper_case = True
+        elif i.isalpa() and i.islower():
+            has_lower_case = True
+        else:
+            has_symbols = True
+    return has_digit and has_upper_case and has_lower_case and has_symbols
+
+class SignupView(View):
     def get(self,request,*args,**kwargs):
-        if not request.user.is_authenticated:
-            raise Http404
         
-        mybaskets = Mybasket.objects.filter(
-            user = request.user
-        )
-        total = 0
-        for basket in mybaskets:
-           total += basket.cloth.price
-           total_price = round(total,2)
-
-        context = {
-            "mybaskets" : mybaskets,
-            "total_price" : total_price,
-        }
-
-        return render(request,"mybasket.html",context)
+        return render(request,'signup.html')
     
     def post(self,request,*args,**kwargs):
-        basket_id = request.POST.get("basket_id")
-        basket = Mybasket.objects.get(id=basket_id)
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        
+        if not User.objects.filter(username=username).exists():
+            if not check_password(password) :
+                messages.info(request, "Password must be at least 8 symbols")
+                return redirect('signup')
+            elif not check_validation(password):
+                messages.info(request,"Password must contain both characters and numbers")
+                return redirect('signup')
+            else:
+                User.objects.create_user(
+                username = username,
+                password = password
+            )
 
-        basket.delete()
-        return redirect("mybasket")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "You logged in.")
+                return redirect("index")
+        else:
+            messages.info(request,"Username has been taken")
+            return redirect("signup")
+        
+#--------------------------------------------------------------------------------------------------
+class LoginUserView(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,'login.html')
+    
+    def post(self,request,*args,**kwargs):
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request,user)
+            messages.success(request, "You logged in.")
+            return redirect("index")
+        else:
+            if not User.objects.filter(username=username).exists():
+                messages.info(request,"Please enter correct username")
+            else:
+                messages.info(request,"Please, enter correct password")
+            return redirect("login")
+#-----------------------------------------------------------------------------------------
+def logoutUser(request):
+    logout(request)
+    return redirect("index")
+#------------------------------------------------------------------------------------------
+class ChangepasswordView(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,'changepassword.html')
+    
+    def post(self,request,*args,**kwargs):
+        username = request.POST.get("username")
+        newpassword1 = request.POST.get("newpassword1")
+        newpassword2 = request.POST.get("newpassword2")
+        user = User.objects.get(username=username)
+
+        if newpassword1 == newpassword2:
+            user.set_password(newpassword1)
+            user.save()
+            messages.success(request, "Password changed")
+
+        return redirect("login")
 
     
