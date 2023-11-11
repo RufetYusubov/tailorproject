@@ -20,7 +20,6 @@ Contact
 			<ul class="nav_list">
 				<li><a href="{% url 'index' %}">ƏSAS SƏHİFƏ</a></li>
 				<li><a href="{% url 'index' %}">MƏHSULLAR</a></li>
-				<li><a href="#about">HAQQIMIZDA</a></li>
 				<li><a href="{% url 'contact' %}">BİZİMLƏ ƏLAQƏ</a></li>
 			</ul>
 		</nav>
@@ -37,19 +36,6 @@ Contact
 
 				<input type="text" placeholder="Search for items...">
 			</div>
-			{% if request.user.is_authenticated %} 
-			<a href="{% url 'logout' %}">
-			<svg class="user_icon"  width="25" height="25" viewBox="0 0 25 25" fill="none"
-				xmlns="http://www.w3.org/2000/svg"> 
-				<path
-					d="M20.5 21.5V19.5C20.5 18.4391 20.0786 17.4217 19.3284 16.6716C18.5783 15.9214 17.5609 15.5 16.5 15.5H8.5C7.43913 15.5 6.42172 15.9214 5.67157 16.6716C4.92143 17.4217 4.5 18.4391 4.5 19.5V21.5"
-					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-				<path
-					d="M12.5 11.5C14.7091 11.5 16.5 9.70914 16.5 7.5C16.5 5.29086 14.7091 3.5 12.5 3.5C10.2909 3.5 8.5 5.29086 8.5 7.5C8.5 9.70914 10.2909 11.5 12.5 11.5Z"
-					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-			</svg>
-			</a>
-			{% else %}
 			<a href="{% url 'login' %}">
 			<svg class="user_icon"  width="25" height="25" viewBox="0 0 25 25" fill="none"
 				xmlns="http://www.w3.org/2000/svg"> 
@@ -61,9 +47,6 @@ Contact
 					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 			</svg>
 			</a>
-			{% endif %} 
-			{% if request.user.is_authenticated %}
-			<!-- <a href="{% url 'mybasket' %}">
 			<svg class="bag_icon" width="25" height="25" viewBox="0 0 25 25" fill="none"
 				xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -75,8 +58,6 @@ Contact
 					d="M16.5 10.5C16.5 11.5609 16.0786 12.5783 15.3284 13.3284C14.5783 14.0786 13.5609 14.5 12.5 14.5C11.4391 14.5 10.4217 14.0786 9.67157 13.3284C8.92143 12.5783 8.5 11.5609 8.5 10.5"
 					stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 			</svg>
-			</a> -->
-			{% endif %}
 		</div>
 	</div>
 	<div class="slider slider_header">

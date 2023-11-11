@@ -47,6 +47,24 @@ class ContactView(View):
 
         return redirect("contact") 
     
+#---------------------------------------------------------------------
+class DetailView(View):
+    def get(self,request,id,*args,**kwargs):
+        if not request.user.is_authenticated:
+            raise Http404
+        
+        cloth = ClothModel.objects.get(id=id)
+        sizes = SizeModel.objects.all()
+        contacts = ContactUsModel.objects.all()
+
+        context = {
+            "cloth" : cloth,
+            "sizes" : sizes,
+            "contacts" : contacts
+        }
+
+        return render(request,"detail.html",context)
+    
 
 #-----------------------------------------------------------------------
 # ------------------------- Signup Login  -------------------------------------------
@@ -56,18 +74,16 @@ def check_password(password):
     return False
 
 def check_validation(password):
-    has_digit, has_upper_case, has_lower_case, has_symbols = False, False, False, False
+    has_digit, has_lower_case, has_upper_case = False, False,False
 
     for i in password:
         if i.isdigit():
             has_digit =  True
         elif i.isalpha() and i.isupper():
             has_upper_case = True
-        elif i.isalpa() and i.islower():
+        elif i.isalpha() and i.islower():
             has_lower_case = True
-        else:
-            has_symbols = True
-    return has_digit and has_upper_case and has_lower_case and has_symbols
+    return has_digit and has_lower_case and has_upper_case
 
 class SignupView(View):
     def get(self,request,*args,**kwargs):
@@ -124,7 +140,7 @@ class LoginUserView(View):
 #-----------------------------------------------------------------------------------------
 def logoutUser(request):
     logout(request)
-    return redirect("index")
+    return redirect("login")
 #------------------------------------------------------------------------------------------
 class ChangepasswordView(View):
     def get(self,request,*args,**kwargs):
